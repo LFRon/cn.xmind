@@ -22,7 +22,7 @@ sources:
 build: |
     ## 环境设置
     set -x
-    SOURCES="linglong/sources"
+    SOURCES="linglong/app-sources"
     export PATH=$PATH:/usr/libexec/linglong/builder/helper
     BINNAME=${LINGLONG_APPID}
     cd ${SOURCES}
@@ -31,14 +31,14 @@ build: |
     rm -rf target.deb ${LINGLONG_APPID}
 
     # 移动安装包至此处
-    mv ../sources/*.deb ./target.deb
+    cp ../sources/*.deb ./target.deb
 
     # 解包deb并拷贝出应用本体
     dpkg-deb -R ./target.deb deb
     mv ./deb/opt/Xmind ./${LINGLONG_APPID}
 
-    # 删除多余目录
-    rm -rf ./deb
+    # 删除多余目录与安装包
+    rm -rf ./deb ./target.deb
 
     # 写入启动脚本
     echo "#!/bin/bash" > bin/${BINNAME}
