@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Xmind
+Name[zh_CN]=Xmind
+Icon=xmind
+Terminal=false
+StartupWMClass=Xmind
+Exec=/opt/apps/cn.xmind/files/bin/cn.xmind %U
+Comment=The most popular mind mapping software
+Comment[zh_CN]=最流行的专业思维导图软件
+MimeType=application/xmind;x-scheme-handler/xmind;x-scheme-handler/xmind-zen;
+Categories=Office;

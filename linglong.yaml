@@ -1,0 +1,52 @@
+version: "1"
+
+package:
+  id: cn.xmind
+  name: XMind
+  version: 26.1.7153.0
+  kind: app
+  description: |
+    XMind是一款专业的思维导图软件, 这是其Linux原生版本
+
+base: org.deepin.base/25.2.1
+runtime: null
+
+command:
+  - "/opt/apps/cn.xmind/files/bin/cn.xmind"
+
+sources:
+  - kind: file
+    url: https://dl3.xmind.cn/Xmind-for-Linux-amd64bit-26.01.07153-202512110451.deb
+    digest: e6f4f91b088d78f9c0149f0a492ead2366d13d00d560b9dd8b99676296b7504b
+
+build: |
+    ## 环境设置
+    set -x
+    SOURCES="linglong/sources"
+    export PATH=$PATH:/usr/libexec/linglong/builder/helper
+    BINNAME=${LINGLONG_APPID}
+    cd ${SOURCES}
+
+    # 清理旧的安装包文件
+    rm -rf target.deb ${LINGLONG_APPID}
+
+    # 移动安装包至此处
+    mv ../sources/*.deb ./target.deb
+
+    # 解包deb并拷贝出应用本体
+    dpkg-deb -R ./target.deb deb
+    mv ./deb/opt/Xmind ./${LINGLONG_APPID}
+
+    # 删除多余目录
+    rm -rf ./deb
+
+    # 写入启动脚本
+    echo "#!/bin/bash" > bin/${BINNAME}
+    echo "exec \"${PREFIX}/${LINGLONG_APPID}/xmind\" \"\$@\"" >> bin/${BINNAME}
+    chmod -R 755 bin/*
+
+    # 进行安装
+    cp -a bin $PREFIX
+    cp -a $LINGLONG_APPID $PREFIX
+    cp -a share $PREFIX
+    cp -a libs $PREFIX/lib
