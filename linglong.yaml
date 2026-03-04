@@ -3,7 +3,7 @@ version: "1"
 package:
   id: cn.xmind
   name: XMind
-  version: 26.1.7153.0
+  version: 26.2.4171.0
   kind: app
   description: |
     XMind是一款专业的思维导图软件, 这是其Linux原生版本
@@ -16,8 +16,8 @@ command:
 
 sources:
   - kind: file
-    url: https://dl3.xmind.cn/Xmind-for-Linux-amd64bit-26.01.07153-202512110451.deb
-    digest: e6f4f91b088d78f9c0149f0a492ead2366d13d00d560b9dd8b99676296b7504b
+    url: https://dl3.xmind.cn/Xmind-for-Linux-amd64bit-26.02.04171-202602092329.deb
+    digest: 4e18a6d6caf728f7def847e6a59ee1f41b6d2f862411ee6e4b43d791997c8404
 
 build: |
     ## 环境设置
